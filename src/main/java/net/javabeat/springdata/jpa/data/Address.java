@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /*
 @author mesuta
 @since 2.1.2015
- This document  relationl Employee 
-Employee contains Address information
-
+ @param Id 
+@param addressCountry
+@param addresscity
 */
 
 

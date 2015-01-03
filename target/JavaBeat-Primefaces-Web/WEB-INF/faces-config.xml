@@ -8,6 +8,10 @@
 		<base-name>net.javabeat.jsf.application.message</base-name>
 		<var>msg</var>
 	</resource-bundle>
+        <locale-config>
+         <default-locale>en_US</default-locale>
+         <supported-locale>tr_TR</supported-locale>
+     </locale-config>
         
 	<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 </application>

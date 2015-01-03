@@ -2,38 +2,45 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+   
     <h:head>
         <script name="jquery/jquery.js" library="primefaces"></script>
     </h:head>	
     <f:view>
+        
+        
+      
+        
         <h:form id="form">
             <p:growl id="msgs" showDetail="true" sticky="true" /> 
-            <h3>IS</h3>
-            <h2>Primefaces Spring Data  MongoDB</h2>
-
+           
+            <h2>Prime Spring Mongo</h2>
 
             <h:panelGrid columns="2">
-                <h:outputText value="AD:"/>
+                <h:outputText value="#{msg['label.name']}"/>
                 <p:inputText id="ad" value="#{registrationManagedBean.employee.employeeName}">
                     <f:validateLength minimum="3" />
                 </p:inputText>
 
-                <h:outputText value="Soyad:"/>
+                <h:outputText value="#{msg['label.surname']}"/>
                 <p:inputText value="#{registrationManagedBean.employee.employeeSurname}" required="true" requiredMessage="SoyAdi Alani Bos Birakilamaz">
                     <f:validateLength minimum="3" />
                 </p:inputText>
 
-                <h:outputText value="Telefon Numarasi:"/>
+                <h:outputText value="#{msg['label.phoneNumber']}"/>
                 <p:inputMask mask="(999) 999-9999" value="#{registrationManagedBean.employee.telephoneNumber}" required="true" requiredMessage="Telefon Numarasi Bos Birakilamaz">
                 </p:inputMask>
 
-                <h:outputText  value="Sehir:"/>
+                <h:outputText  value="#{msg['label.city']}"/>
                 <p:inputText value="#{registrationManagedBean.employee.address.addressCity}"></p:inputText>
+                
+                
+                <p:outputLabel for="captcha" value="#{msg['label.captchaControl']}"/>
+                <p:separator/>
+                <p:captcha id='captcha'/>
 
-                <p:captcha/>
 
-
-                <p:commandButton value="Kaydet"
+                <p:commandButton value="#{msg['label.register']}"
                                  icon='ui-icon-check'
                                  onstart="PF('statusDialog').show();"
                                  oncomplete="PF('statusDialog').hide();"
@@ -52,26 +59,26 @@
             <h:panelGrid columns="1">
                 <p:dataTable id="table" value="#{registrationManagedBean.employees}" var="employee">
                     
-                    <p:column headerText="AD">
+                    <p:column headerText="#{msg['label.name']}">
                         <h:outputText value="#{employee.employeeName}"/>
                     </p:column>
                     
-                    <p:column headerText="Soyad">
+                    <p:column headerText="#{msg['label.surname']}">
                         <h:outputText value="#{employee.employeeSurname}"/>
                     </p:column>
 
-                    <p:column headerText="Telefon Numarasi">
+                    <p:column headerText="#{msg['label.phoneNumber']}">
                         <h:outputText value="#{employee.telephoneNumber}"/>
                     </p:column>
 
-                    <p:column headerText="Sehir">
+                    <p:column headerText="#{msg['label.city']}">
                         <h:outputText value="#{employee.address.addressCity}"/>
                     </p:column>
 
 
                     <p:column>
 
-                        <p:commandButton value="Guncelle"
+                        <p:commandButton value="#{msg['label.update']}"
                                          icon='ui-icon-refresh'
                                          actionListener="#{registrationManagedBean.update(employee)}"
                                          oncomplete="PF('dlg2').show();" 
@@ -82,7 +89,7 @@
 
                     <p:column>
 
-                        <p:commandButton value="Sil"
+                        <p:commandButton value="#{msg['label.delete']}"
                                          icon='ui-icon-close'
                                          actionListener="#{registrationManagedBean.deleteRecord(employee)}"
                                          update=":employeeTable:table"
@@ -116,30 +123,31 @@
             
                 <p:panelGrid columns="2">
                 
-                    <p:outputLabel for="ad" value="AD" />
-                    <p:inputText id="ad" value="#{registrationManagedBean.updateEmployee.employeeName}" required="true" requiredMessage="Ad Alani Bos Birakilamaz.." />
+                    <p:outputLabel for="ad" value="#{msg['label.name']}" />
+                    <p:inputText id="ad" value="#{registrationManagedBean.updateEmployee.employeeName}" required="true" requiredMessage="#{msg['validation.message.name']}" />
 
-                    <p:outputLabel for="soyad" value="SOYAD" />
-                    <p:inputText id="soyad" value="#{registrationManagedBean.updateEmployee.employeeSurname}" />
+                    <p:outputLabel for="soyad" value="#{msg['label.surname']}" />
+                    <p:inputText id="soyad" value="#{registrationManagedBean.updateEmployee.employeeSurname}" required="true" requiredMessage="#{msg['validation.message.surname']}" />
 
-                    <p:outputLabel for="tel" value="TEL" />
+                  
+                    <p:outputLabel for="sehir" value="#{msg['label.city']}" />
+                    <p:inputText id="sehir" value="#{registrationManagedBean.updateEmployee.address.addressCity}" />
+                     
+                      <p:outputLabel for="tel" value="#{msg['label.phoneNumber']}" />
                     <p:inputMask id="tel"  mask="(999) 999-9999"
                                  value="#{registrationManagedBean.updateEmployee.telephoneNumber}"
                                  required="true" 
                                  requiredMessage="Telefon Alani Bos Birakilamaz.." />
 
-                    <p:outputLabel for="sehir" value="SEHIR" />
-                    <p:inputText id="sehir" value="#{registrationManagedBean.updateEmployee.address.addressCity}" />
 
 
-
-                    <p:commandButton value="Kaydi Guncelle"
+                    <p:commandButton value="#{msg['label.update']}"
                                      actionListener="#{registrationManagedBean.updateRecord}" 
                                      onstart="PF('statusDialog').show();"
                                      oncomplete="PF('statusDialog').hide();"
                                      update=":employeeTable:table :updateDialogForm:msgsUpdate" />
 
-                    <p:commandButton value="Vazgec"
+                    <p:commandButton value="#{msg['label.cancel']}"
                                      type="button"
                                      onclick="PF('dlg2').hide();"
                                      />

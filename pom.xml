@@ -6,6 +6,16 @@
 	<artifactId>JavaBeat-Primefaces-Web</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
+        
+        <repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
+        
+        
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -54,6 +64,10 @@
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
+                
+                
+                
+                <!--JSF Dependencies for somelibrary-->
 
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -66,11 +80,20 @@
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.4</version>
 		</dependency>
+                <!--primefaces dependency for UI -->
 
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>5.1</version>
+		</dependency>
+                
+                
+                
+                <dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>glass-x</artifactId>
+			<version>1.0.6</version>
 		</dependency>
 
 		<dependency>
@@ -116,15 +139,13 @@
 			<version>r09</version>
 		</dependency>
                 
-               
               
- 
-                
+                    <!--spring mvc library-->
                 <dependency>
-	<groupId>org.springframework</groupId>
-	<artifactId>spring-webmvc</artifactId>
-	<version>4.1.4.RELEASE</version>
-</dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
+                    <version>4.1.4.RELEASE</version>
+                </dependency>
 
                 
                 

@@ -11,7 +11,7 @@
   
   
   
-  
+  <!--primefaces glass-x theme-->
   <context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>glass-x</param-value>
@@ -19,7 +19,7 @@
   
   
  
-  
+  <!--Captcha parameters -->
    <context-param>
         <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
         <param-value>6Le26PESAAAAAM2ENZ5Qhyb-QOxMfvg1jYmGirqq</param-value>
@@ -55,6 +55,11 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  <welcome-file-list>
+      
+      <welcome-file>index.xhtml</welcome-file>
+      
+  </welcome-file-list>
   
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

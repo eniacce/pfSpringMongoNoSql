@@ -1,0 +1,173 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>	
+    <f:view>
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true" sticky="true" /> 
+            <h3>IS</h3>
+            <h2>Primefaces Spring Data  MongoDB</h2>
+
+
+            <h:panelGrid columns="2">
+                <h:outputText value="AD:"/>
+                <p:inputText id="ad" value="#{registrationManagedBean.employee.employeeName}">
+                    <f:validateLength minimum="3" />
+                </p:inputText>
+
+                <h:outputText value="Soyad:"/>
+                <p:inputText value="#{registrationManagedBean.employee.employeeSurname}" required="true" requiredMessage="SoyAdi Alani Bos Birakilamaz">
+                    <f:validateLength minimum="3" />
+                </p:inputText>
+
+                <h:outputText value="Telefon Numarasi:"/>
+                <p:inputMask mask="(999) 999-9999" value="#{registrationManagedBean.employee.telephoneNumber}" required="true" requiredMessage="Telefon Numarasi Bos Birakilamaz">
+                </p:inputMask>
+
+                <h:outputText  value="Sehir:"/>
+                <p:inputText value="#{registrationManagedBean.employee.address.addressCity}"></p:inputText>
+
+                <p:captcha/>
+
+
+                <p:commandButton value="Kaydet"
+                                 icon='ui-icon-check'
+                                 onstart="PF('statusDialog').show();"
+                                 oncomplete="PF('statusDialog').hide();"
+                                 actionListener="#{registrationManagedBean.register}"
+                                 update=":employeeTable:table :form:msgs"  />
+
+
+
+            </h:panelGrid>
+        </h:form>
+
+        <p:separator/>
+
+        <h:form id="employeeTable">
+            
+            <h:panelGrid columns="1">
+                <p:dataTable id="table" value="#{registrationManagedBean.employees}" var="employee">
+                    
+                    <p:column headerText="AD">
+                        <h:outputText value="#{employee.employeeName}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Soyad">
+                        <h:outputText value="#{employee.employeeSurname}"/>
+                    </p:column>
+
+                    <p:column headerText="Telefon Numarasi">
+                        <h:outputText value="#{employee.telephoneNumber}"/>
+                    </p:column>
+
+                    <p:column headerText="Sehir">
+                        <h:outputText value="#{employee.address.addressCity}"/>
+                    </p:column>
+
+
+                    <p:column>
+
+                        <p:commandButton value="Guncelle"
+                                         icon='ui-icon-refresh'
+                                         actionListener="#{registrationManagedBean.update(employee)}"
+                                         oncomplete="PF('dlg2').show();" 
+                                         update=":updateDialogForm:updateDialog"/>
+
+                    </p:column>
+
+
+                    <p:column>
+
+                        <p:commandButton value="Sil"
+                                         icon='ui-icon-close'
+                                         actionListener="#{registrationManagedBean.deleteRecord(employee)}"
+                                         update=":employeeTable:table"
+                                         >
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                    </p:column>
+
+
+                </p:dataTable>
+
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            
+            
+            </h:panelGrid>  
+        
+        
+        </h:form>
+
+
+        <h:form id="updateDialogForm">
+            
+            <p:growl id="msgsUpdate" showDetail="true" sticky="true" />
+            
+            <p:dialog id="updateDialog" header="Modal Dialog" widgetVar="dlg2" modal="true" height="300">
+            
+                <p:panelGrid columns="2">
+                
+                    <p:outputLabel for="ad" value="AD" />
+                    <p:inputText id="ad" value="#{registrationManagedBean.updateEmployee.employeeName}" required="true" requiredMessage="Ad Alani Bos Birakilamaz.." />
+
+                    <p:outputLabel for="soyad" value="SOYAD" />
+                    <p:inputText id="soyad" value="#{registrationManagedBean.updateEmployee.employeeSurname}" />
+
+                    <p:outputLabel for="tel" value="TEL" />
+                    <p:inputMask id="tel"  mask="(999) 999-9999"
+                                 value="#{registrationManagedBean.updateEmployee.telephoneNumber}"
+                                 required="true" 
+                                 requiredMessage="Telefon Alani Bos Birakilamaz.." />
+
+                    <p:outputLabel for="sehir" value="SEHIR" />
+                    <p:inputText id="sehir" value="#{registrationManagedBean.updateEmployee.address.addressCity}" />
+
+
+
+                    <p:commandButton value="Kaydi Guncelle"
+                                     actionListener="#{registrationManagedBean.updateRecord}" 
+                                     onstart="PF('statusDialog').show();"
+                                     oncomplete="PF('statusDialog').hide();"
+                                     update=":employeeTable:table :updateDialogForm:msgsUpdate" />
+
+                    <p:commandButton value="Vazgec"
+                                     type="button"
+                                     onclick="PF('dlg2').hide();"
+                                     />
+
+                </p:panelGrid>
+
+            </p:dialog>  
+
+
+
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage value="/resources/images/ajax-loader.gif" />
+            </p:dialog>
+
+        </h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </f:view>
+</html>
+
